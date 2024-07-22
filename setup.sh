@@ -13,21 +13,6 @@ if [ ! -f "$SERVICE_FILE" ]; then
   exit 1
 fi
 
-# Get the number of CPUs available
-num_cpus=$(nproc)
-
-# Subtract 4 from the number of CPUs
-num_threads=$((num_cpus - 4))
-
-# Check if OLLAMA_NUM_THREADS is already set
-if [ -z "${OLLAMA_NUM_THREADS}" ]; then
-    # If OLLAMA_NUM_THREADS is not set, set it to num_threads
-    export OLLAMA_NUM_THREADS=$num_threads
-    echo "OLLAMA_NUM_THREADS was not set. It is now set to $OLLAMA_NUM_THREADS."
-else
-    echo "OLLAMA_NUM_THREADS is already set to $OLLAMA_NUM_THREADS. No changes were made."
-fi
-
 # Check if the environment variable is already set
 if grep -q "Environment=\"OLLAMA_HOST=0.0.0.0\"" "$SERVICE_FILE"; then
   echo "OLLAMA_HOST is already set to 0.0.0.0. No changes were made."
