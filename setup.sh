@@ -1,5 +1,7 @@
 #!/bin/bash
-
+update -y
+upgrade -y
+apt install htop -y
 curl -fsSL https://ollama.com/install.sh | sh
 
 # Define the service file path
